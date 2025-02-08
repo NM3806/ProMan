@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hides the scrollbar while allowing scrolling */
+html {
+  scrollbar-width: none; /* For Firefox */
+  overflow-y: overlay; /* For modern browsers */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, Edge */
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

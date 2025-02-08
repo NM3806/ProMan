@@ -3,6 +3,7 @@
 import {cn} from "@/lib/utils"
 import Link from 'next/link'
 import { ThemeToggle } from './ThemeToggle'; 
+import { UserMenu } from "./UserMenu";
 
 interface HeaderProps {
   className?: string;
@@ -19,13 +20,15 @@ export const Header = ({ className }: HeaderProps) => {
       <div className="container flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="flex items-center space-x-2 font-bold text-xl hover:text-primary transition-colors"
+          className="flex items-center space-x-2 font-bold  text-xl hover:text-primary transition-colors"
         >
           Git-ish
         </Link>
-
-        <div className="border-l pl-4 dark:border-gray-800">
-          <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <div className="dark:border-gray-800"><UserMenu /></div>
+          <div className="border-l pl-4 dark:border-gray-800">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>
