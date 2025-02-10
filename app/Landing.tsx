@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import { useUser, useAuth, SignInButton, SignOutButton } from '@clerk/nextjs';
 
 const features = [
     'Intuitive Kanban boards',
@@ -15,6 +16,8 @@ const features = [
 
 const LandingPage: React.FC = () => {
     const { resolvedTheme } = useTheme();
+    const { isSignedIn, user } = useUser();
+    const { signOut } = useAuth();
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
@@ -36,14 +39,24 @@ const LandingPage: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" asChild>
-                            <Link href="/create-account" className="gap-2">
-                                Get Started <ArrowRight className="h-4 w-4" />
-                            </Link>
-                        </Button>
-                        <Button size="lg" variant="outline" asChild>
-                            <Link href="/login">Sign in</Link>
-                        </Button>
+                        {isSignedIn ? (
+                            <Button size="lg" asChild>
+                                <Link href="/dashboard" className="gap-2">
+                                    Go to Dashboard <ArrowRight className="h-4 w-4" />
+                                </Link>
+                            </Button>
+                        ) : (
+                            <>
+                                <Button size="lg" asChild>
+                                    <Link href="/create-account" className="gap-2">
+                                        Get Started <ArrowRight className="h-4 w-4" />
+                                    </Link>
+                                </Button>
+                                <Button size="lg" variant="outline" asChild>
+                                    <Link href="/login">Sign in</Link>
+                                </Button>
+                            </>
+                        )}
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4 pt-4 max-w-[600px] mx-auto">
                         {features.map((feature) => (
