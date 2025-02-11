@@ -22,7 +22,7 @@ export const Header = ({ className }: HeaderProps) => {
           href="/"
           className="flex items-center space-x-2 font-bold text-xl hover:text-primary transition-colors"
         >
-          Git-ish
+          ProMan
         </Link>
         <div className="flex items-center gap-4">
           <UserMenu />
