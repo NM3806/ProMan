@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import { useUser, useAuth, SignInButton, SignUpButton } from '@clerk/nextjs';
 
 export function UserMenu() {
-  const { isSignedIn, user, imageURL, hasImage } = useUser();
+  const { isSignedIn, user } = useUser();
   const { signOut } = useAuth();
 
   const handleSignOut = async () => {
@@ -42,8 +42,12 @@ export function UserMenu() {
           className="relative h-9 w-9 rounded-full border bg-background"
         >
           {isSignedIn ? (
-            hasImage ? (
-              <img src={imageURL} alt="User" className="h-5 w-5 rounded-full" />
+            user?.imageUrl ? (
+              <img
+                src={user.imageUrl}
+                alt="User"
+                className="h-5 w-5 rounded-full"
+              />
             ) : (
               <UserCheck className="h-5 w-5" />
             )
@@ -59,7 +63,7 @@ export function UserMenu() {
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {user?.fullName || 'User'}
+                  {user?.username || 'User'}
                 </p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {user?.primaryEmailAddress?.emailAddress || 'No email'}
